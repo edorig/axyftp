@@ -1,0 +1,14 @@
+01/21/2000
+
+GUI rewrite.
+Ability to have multiple connections.
+Similtaneous downloading and directory browsing.
+Firewalls.
+Profile name in command line
+Debug "cancel"
+Sorting capabilities
+Context-sensitive help.
+More flexibility in Viewer and Help browser.
+Keyboard traversal (like scrolling to the filename starting with the letter
+you pressed?)
+Expansion of "~" in dirname window?

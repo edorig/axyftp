@@ -1,0 +1,40 @@
+This is source distribution the developemnt version of AxY FTP 
+(formerly known as WXftp)
+
+AxY FTP is not in a public domain. Please read LICENSE for details.
+
+
+INSALLATION INSTRUCTIONS
+
+You may build AxY FTP with either Motif 1.2/2.0/2.1 or GTK+ 1.0/1.2 interface.
+Lesstif is also supported.
+
+./configure 
+make
+make install (or make install-strip)
+
+Name of the executable is "axyftp".
+
+You may want to run "./configure --help" first to learn about all available
+options. One of the most important are:
+ --with-gui=GUI where GUI is either motif or gtk. By default, configure
+                script first searches for Motif installation and, if not
+		found, for GTK. 
+ --with-help=DIR  where DIR is a directory you want to have help files
+		   installed into.
+
+Please not that if you are building Motif version, CDE DtWidget library is
+needed. Pretty workable clone is supplied with the distribution in case you
+don't have one installed. Also, XmAxy library containing Notebook and enhanced
+List Motif-based widgets is also supplied. Libraries are not installed by
+default. Use "./configure --enable-install-dt --enable-install-xmaxy" to
+install them.
+
+Also, you may find various AxY FTP logo icons in XPM format in icons/
+subdirectory.
+
+Good luck!
+
+Alexander Yukhimets
+alexy@edgarmail.com
+

@@ -1,0 +1,36 @@
+
+AxY FTP (WXftp) is copyright (c) 1998 by Alexander Yukhimets <alexy@edgarmail.com>. 
+All rights under the copyright reserved. 
+
+1. Distribution.
+
+This software is subject to the terms of "Artistic license". 
+Copy of the license can be found in "Artistic" file.
+
+Also, the following files included in the source code distribution of the
+software can be distributed/modified under the terms of either "Artistic
+license" or (at your option) GNU Library General Public License  version 2: 
+            ftp.h ftp.c ftp_xfer.h ftp_xfer.c.
+Copy of the GNU LGPL can be found in "LGPL" file.
+
+
+2. DISCLAIMER OF WARRANTY.
+
+THE SOFTWARE IS PROVIDED UNDER THIS LICENSE ON AN ``AS IS'' BASIS,
+WITHOUT WARRANTY OF ANY KIND, EITHER EXPRESSED OR IMPLIED,
+INCLUDING, WITHOUT LIMITATION, WARRANTIES THAT THE COVERED
+WORKS ARE FREE OF DEFECTS, MERCHANTABLE, FIT FOR A PARTICULAR
+PURPOSE OR NON-INFRINGING. THE ENTIRE RISK AS TO THE QUALITY AND
+PERFORMANCE OF THE COVERED WORKS IS WITH YOU. SHOULD ANY
+COVERED WORK PROVE DEFECTIVE IN ANY RESPECT, YOU (NOT THE
+INITIAL DEVELOPER OR ANY OTHER CONTRIBUTOR) ASSUME THE COST OF
+ANY NECESSARY SERVICING, REPAIR OR CORRECTION. THIS DISCLAIMER OF
+WARRANTY CONSTITUTES AN ESSENTIAL PART OF THIS LICENSE. NO USE
+OF ANY COVERED WORK IS AUTHORIZED HEREUNDER EXCEPT UNDER THIS
+DISCLAIMER. 
+
+WARNING:
+
+This is an ``alpha'' quality software. Please avoid any use on a production, 
+mission-critical, or systems with sensitive or unrecoverable data. 
+

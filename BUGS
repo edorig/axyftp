@@ -1,0 +1,32 @@
+Using the locale fr_FR axyftp does not list the local directory.
+However, with LANG=C the local directory is correctly listed.
+
+The reason seems to be that axyftp is calling ls -la to produce a local
+directory listing. 
+
+with LANG=C the format is 
+drwxr-xr-x   3 edmond users   4096 Jul 14  2014 doc
+drwxr-xr-x   9 edmond users   4096 Jan  2  2003 dtwidget
+drwxr-xr-x   2 edmond users   4096 Jul 14  2014 icons
+-rwxr-xr-x   1 edmond users   5598 Jan 21  2000 install-sh
+drwxr-xr-x   2 edmond users   4096 Jul 14  2014 macro
+-rwxr-xr-x   1 edmond users   6283 Jan 21  2000 missing
+-rwxr-xr-x   1 edmond users    722 Jan 21  2000 mkinstalldirs
+drwxr-xr-x   2 edmond users   4096 Nov  9  2014 src
+drwxr-xr-x   4 edmond users   4096 Jul 14  2014 xmaxy
+drwxr-xr-x   2 edmond users   4096 Jul 14  2014 xpms
+
+with LANG=fr_FR, it becomes:
+
+drwxr-xr-x   3 edmond users   4096 2014-07-14 16:11 doc
+drwxr-xr-x   9 edmond users   4096 2003-01-02 16:51 dtwidget
+drwxr-xr-x   2 edmond users   4096 2014-07-14 16:11 icons
+-rwxr-xr-x   1 edmond users   5598 2000-01-21 19:50 install-sh
+drwxr-xr-x   2 edmond users   4096 2014-07-14 16:11 macro
+-rwxr-xr-x   1 edmond users   6283 2000-01-21 19:50 missing
+-rwxr-xr-x   1 edmond users    722 2000-01-21 19:50 mkinstalldirs
+drwxr-xr-x   2 edmond users   4096 2014-11-09 17:42 src
+drwxr-xr-x   4 edmond users   4096 2014-07-14 16:11 xmaxy
+drwxr-xr-x   2 edmond users   4096 2014-07-14 16:11 xpms
+
+The easy fix is to put a "LANG=C" in the call of ls.

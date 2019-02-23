@@ -1,0 +1,45 @@
+CC = gcc -Wall
+#CC= gcc  -Wimplicit-function-declaration -Wunused -Wswitch -Wcomment \
+         -Wtrigraphs -Wformat -Wchar-subscripts -Wparentheses 
+
+AR = ar ruv
+RANLIB = ranlib
+
+MOTIF_INCLUDE=-I/opt/motif12/include
+#MOTIF_INCLUDE=-I/opt/lesstif/include
+#MOTIF_INCLUDE=-I/usr/include
+#MOTIF_INCLUDE=-I/usr/dt/include
+
+MOTIF_LIB=-L/opt/motif12/lib -lXm
+#MOTIF_LIB=-L/opt/lesstif/lib -lXm
+#MOTIF_LIB=-L/usr/lib -lXm
+#MOTIF_LIB=-L/usr/dt/lib -lXm
+
+X_INCLUDE=-I/usr/X11R6/include
+#X_INCLUDE=-I/usr/include
+#X_INCLUDE=-I/usr/openwin/include
+
+X_LIB=-L/usr/X11R6/lib -lXt -lX11
+#X_LIB=-L/usr/lib -lXt -lX11 
+#X_LIB=-L/usr/openwin/lib -lXt -lX11 
+
+CFLAGS = -g -I.. -I. $(MOTIF_INCLUDE) $(X_INCLUDE)
+
+OBJECTS = ComboBox.o
+
+all:		libDtWidget.a
+
+libDtWidget.a:	$(OBJECTS)
+		$(AR) libDtWidget.a $(OBJECTS)
+		$(RANLIB) libDtWidget.a	
+
+demo:		demo.o libDtWidget.a
+		$(CC) -o demo demo.o libDtWidget.a \
+		$(MOTIF_LIB) $(X_LIB)
+
+distclean:      clean 
+		rm -f Dt *.a
+clean:		
+		rm -f *~ *.o demo
+
+.PHONY:		clean distclean all demo

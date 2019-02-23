@@ -1,0 +1,49 @@
+This is an attempt to create a small widget library compatible with standard
+libDtWidget from commercial CDE distribution. 
+
+This is release 1.4.0 of the library.
+
+Please let me know what you think about it.
+
+Alex Y.
+(AxY) 
+http://pages.nyu.edu/~aqy6633/
+alexy@edgarmail.com
+
+
+Buiding instructions:
+
+./configure
+make
+make install
+
+For full list of options, run
+./configure --help
+
+
+Contents:
+
+Dt:		Mostly compatible with CDE libDtWidget library sources.
+        	Relevant changes from several places (included in 
+		distribution) are merged into the original Ileaf, Inc. 
+		source. Only CDE-compatible modifications made here.
+		Can be built as a "Multi-Thread Safe" with Motif 2.1.
+
+orig:		"Original" (version 1.1) distribution of ComboBox and 
+		SpinButton widgets by Ileaf, Inc.
+
+moz:		Modified ComboBox from the Mozilla (www.mozilla.org) project.
+moz-clean:	The same as above, with exaclty the same changes to the
+		original source, but cosmetically edited to resemble the 
+		Ileaf source as much as possible in order to minimize diff 
+		size (to be able easily see relevant changes).
+
+cwikla:		ComboBox code, modified by John L. Cwikla (cwikla@wolfram.com)
+cwikla-clean:	The same as above, edited to minimize diff.
+
+jra:		JERRY ADAIR <adair@iglou.com>'s take on modifying SpinButton
+		from the original Ileaf, Inc. widget distribution.
+		Even the name of the widget was changed in CDE, so it is
+		not included in the main library here. Needs much more work.
+		
+

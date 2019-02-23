@@ -1,0 +1,119 @@
+<HTML><HEAD><TITLE>AxY FTP User Guide - Main Window
+Controls</TITLE></HEAD><BODY bgcolor="#F0F0FF">
+<h2>Main Window Controls</h2>
+
+<p>Main window of AxY FTP consists of the <a href="#lower">button bar on the 
+bottom<a>,scrollable status area,
+<a href="#selector">transfer type selector</a>,<a href="#arrows">download/upload</a>
+arrow buttons in the middle, and
+two <a href="panels.html">system panels</a> - for local and remote host. 
+</p>
+
+<a name="lower">
+<h3>Lower Button Bar</h3>
+<p>Button bar on the bottom of the main window contains the following
+action buttons:
+<ul>
+<li><a href="#connect">connect/disconnect</a>
+<li><a href="#cancel">cancel</a>
+<li><a href="#logwnd">logWnd</a>
+<li><a href="#help">help</a>
+<li><a href="#options">options</a>
+<li><a href="#about">about</a>
+<li><a href="#exit">exit</a>
+</ul>
+</p>
+
+<a name="connect">
+<h4>Connect/Disconnect</h4>
+<p>
+You may click on "connect" button to make <a href="session.html">session 
+window</a> to be displayed.
+While connected to some remote host, the same button displays "disconnect"
+instead. Clicking on it will make the program to attempt to close existing
+connection. In some cases the time to perform disconnect may be as long as 
+15 seconds. Please be patient, don't rush to "cancel" button.
+<p>
+
+<a name="cancel">
+<h4>Cancel</h4>
+<p>
+You may use this button to cancel some long operation.
+The typical example would be to cancel the downloading of some unusually
+large directory listing. <br>
+<b>Warning: cancel operations are still very buggy, do not use them unless
+absolutely necessary</b>
+<p>
+
+<a name="logwnd">
+<h4>LogWnd</h4>
+<p>
+Clicking on this button will make the full log of the current session
+to be displayed in the internal AxY FTP viewer window.
+You login data (password) will not be displayed.
+</P>
+
+<a name="help">
+<h4>Help</h4>
+<p>
+Invokes <a href="help.html">AxY FTP Help System.</a>
+</p>
+
+<a name="options">
+<h4>Options</h4>
+<p>
+Click on "options" button to make <a href="options.html">Options Window</a>
+appear. 
+</p>
+
+<a name="about">
+<h4>About</h4>
+<p>
+Displays short information on the version and copyright of the software.
+</p>
+
+
+<a name="exit">
+<h4>Exit</h4>
+<p>
+Shuts the program down.
+</P>
+<P></p>
+
+<a name="selector">
+<h3>Transfer type selector</h3>
+<p>
+Selector consists of three radio buttons labelled "ASCII","Binary", and
+"Auto". Default position is "Binary". If the remote host you are transferring
+files to/from is also a UNIX-like system, use "Binary" mode even for text files,
+it just be a little faster to transfer. "Auto" mode is currently equivalent to
+"Binary", it will try to guess the correct mode by file extension in
+future releases.
+</p>
+
+<a name="arrows">
+<h3>Download/Upload Arrow Buttons</h3>
+<p>
+When connected to some remote host, select several remote or local entries
+and click on "-&gt;" ("&lt;-") button to perform upload (download).
+Both multiple recursive <b>downloads</b> and <b>uploads</b> are implemented.
+</p>
+<p>
+Progress window will appear displaying the file name being transfered,
+the size of the file in bytes, percentage transfered, bytes transfered,
+transfer rate (in kbytes/sec), elapsed time of the transfer and estimated
+time to complete the transfer. You may use "Cancel" button of the progress
+window to interrupt the file transfer.
+Progress bar will appear for large files only or will not appear at all if
+you specified an appropriate <a href="options.html#display">option</a>.
+</p>
+<p>
+When file about to get transfered already exists on the other side, a dialog 
+appears asking for the action to perform. You may chose <b>Overwrite</b> to
+start transfer anew, <b>Resume</b> to continue interrupted download, or
+<b>Skip</b> to leave the file alone.
+</p>
+
+<a href="axyftp.html">Back to the Table of Contents</a>
+
+</body></HTML>

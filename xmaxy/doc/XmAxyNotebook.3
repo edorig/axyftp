@@ -1,0 +1,458 @@
+'\" t
+.TH "XmAxyNotebook" "3X"
+.SH "NAME"
+\fBXmAxyNotebook\fP \(em The Notebook widget class
+.SH "SYNOPSIS"
+.PP
+.nf
+#include <XmAxy/Notebook\&.h>
+.fi
+.SH "DESCRIPTION"
+.PP
+Notebook is a manager widget that organizes its children into pages so 
+and makes only one  of  them  visible  at  a time\&.  For  navigation  
+between pages it shows the tabs at the top. Application designer can also  
+control currently visible page  programatically\&.  Gadget children are fully
+supported\&.
+.PP
+The widget completely ingnores unmanaged children, i.e. even tab with a
+label will not appear for the child that is not managed\&. For the effect of
+empty page, use some kind of a container as a direct child of the Notebook
+and add your widget as a child to that container. In this setup you can 
+manage and unmanage your widget with corresponfing tab always present\&.
+You can even use Notebook itself as such container. In fact, it can be used
+as a general-purpose CardLayout container widget - the one that shows only one
+card (child) at a time\&. For full effect, set \fBXmNshowTabs\fP to FALSE,
+\fBXmNmarginWidth\fP, \fBXmNmarginHeight\fP, \fBXmNinnerMarginHeight\fP, 
+\fBXmNinnerMarginWidth\fP, and \fBXmNshadowThickness\fP to zero\&.
+.PP
+Notebook resizes all of its managed children to the same size.
+Child can request a size change which Notebook will try to accomodate.
+To prevent this behavior, set child's constraint resource \fBXmNresizable\fP to
+FALSE.
+.PP
+Notebook creates one additional child - XmDrawingArea which is used to draw
+tabs and for keyboard operations. The name of the child is "Tabs" and one can
+get the Widget ID ot it by using \fBXtNameToWidget()\fP call.
+Notebook overrides some translations of the DrawingArea Widget.
+
+.SS "Page Numbers"
+.PP
+Notebook internally assigns page numbers to its children starting from 1.
+This process cannot be controlled by the application. Unmanaged children
+are not asigned a number. One can use \fBXmAxyNotebookGetNumberOfPages()\fP
+to get the total number of pages and \fBXmAxyNotebookGetCurrentPage()\fP
+for the number of currently visible page.
+
+.SS "Classes"
+.PP
+Notebook inherits behavior and resources from \fBCore\fP,
+\fBComposite\fP, \fBConstraint\fP, and \fBXmManager\fP classes\&.
+.PP
+The class pointer is \fBxmAxyNotebookWidgetClass\fP\&.
+.PP
+The class name is \fBXmAxyNotebook\fP\&.
+.SS "New Resources"
+.PP
+The following table defines a set of widget resources used by the
+programmer to specify data\&. The programmer can also set the resource
+values for the inherited classes to set attributes for this widget\&.
+The codes in the access column indicate if the given resource
+can be set at creation time (C), set by using \fBXtSetValues\fP
+(S), retrieved by using \fBXtGetValues\fP (G), or is not applicable (N/A)\&.
+.PP
+.TS
+tab() box;
+c s s s s
+l| l| l| l| l.
+\fBXmAxyNotebook Resource Set\fP
+\fBName\fP\fBClass\fP\fBType\fP\fBDefault\fP\fBAccess\fP
+_____
+XmNfontListXmCFontListXmFontListdynamicCSG
+_____
+XmNhighlightThicknessXmCHighlightThicknessDimension1CSG
+_____
+XmNinnerMarginHeightXmCInnerMarginHeightDimension4CSG
+_____
+XmNinnerMarginWidthXmCInnerMarginWidthDimension4CSG
+_____
+XmNlabelMarginHeightXmCLabelMarginHeightDimension2CSG
+_____
+XmNlabelMarginWidthXmCLabelMarginWidthDimension2CSG
+_____
+XmNmarginHeightXmCMarginHeightDimension6CSG
+_____
+XmNmarginWidthXmCMarginWidthDimension6CSG
+_____
+XmNpageChangedCallbackXmCPageChangedCallbackXtCallbackListNULLCSG
+_____
+XmNselectColorXmCSelectColorPixeldynamicCSG
+_____
+XmNshowTabsXmCShowTabsBooleanTRUECSG
+_____
+XmNtabMarginHeightXmCTabMarginHeightDimension2CSG
+_____
+XmNtabMarginWidthXmCTabMarginWidthDimension2CSG
+_____
+XmNtabRaiseXmCTabRaiseDimension2CSG
+_____
+XmNtabSpacingXmCTabSpacingDimension0CSG
+.TE
+.IP "\fBXmNfontList\fP" 10
+Specifies the font list for tab labels\&.
+.IP "\fBXmNhighlightThickness\fP" 10
+Specifies thickness of highlight drawn around the tab label\&.
+.IP "\fBXmNinnerMarginHeight\fP" 10
+Specifies the hight of the margin between a child widget and top/bottom
+shadow\&.
+.IP "\fBXmNinnerMarginWidth\fP" 10
+Specifies the width of the margin between a child widget and left/right
+shadow\&.
+.IP "\fBXmNlabelMarginHeight\fP" 10
+Specifies the margin height between the text of the tab label and highlight\&.
+.IP "\fBXmNlabelMarginWidth\fP" 10
+Specifies the margin width between the text of the tab label and highlight\&.
+.IP "\fBXmNmarginHeight\fP" 10
+Specifies the height of the margin between the edges of the Notebook and
+shadows\&.
+.IP "\fBXmNmarginWidth\fP" 10
+Specifies the width of the margin between the edges of the Notebook and
+shadows\&.
+.IP "\fBXmNpageChangedCallback\fP" 10
+Specifies the list of callbacks to call whenever the Noteabook changes 
+the currently displayed page.
+The callback structure is \fBXmAxyNotebookCallbackStruct\fR\&.
+The reason is \fBXmAxyNotebookPageChangedReason\fP.
+.IP "\fBXmNselectColor\fP" 10
+Specifies the background color for the not current tabs\&.
+Affected by XmChangeColor() routine\&.
+.IP "\fBXmNshowTabs\fP" 10
+Specifies whether tabs should be displayed\&.
+.IP "\fBXmNtabMarginHeight\fP" 10
+Specifies the height of the margin between the edges of the tab and the 
+highlight\&.
+.IP "\fBXmNtabMarginWidth\fP" 10
+Specifies the width of the margin between the edges of the tab and the 
+highlight\&.
+.IP "\fBXmNtabRaise\fP" 10
+Specifies the distance tab would raize when selected\&.
+.IP "\fBXmNtabSpacing\fP" 10
+Specifies the spacing between tabs\&.
+
+.PP
+.TS
+tab() box;
+c s s s s
+l| l| l| l| l.
+\fBXmAxyNotebook Constraint Resource Set\fP
+\fBName\fP\fBClass\fP\fBType\fP\fBDefault\fP\fBAccess\fP
+_____
+XmNtabLabelXmCTabLabelXmStringdynamicCSG
+_____
+XmNresizableXmCResizableBooleanTrueCSG
+.TE
+.IP "\fBXmNtabLabel\fP" 10
+Specifies tab label for this child's page\&.
+Defaults to the child widget name\&.
+.IP "\fBXmNresizable\fP" 10
+Specifies whether this child can request a resize\&.
+.SS "Inherited Resources"
+.PP
+Notebook inherits behavior and resources from the
+superclasses described in the following tables\&.
+For a complete description of each resource, refer to the
+reference page for that superclass\&.
+.TS
+tab() box;
+c s s s s
+l| l| l| l| l.
+\fBXmManager Resource Set\fP
+\fBName\fP\fBClass\fP\fBType\fP\fBDefault\fP\fBAccess\fP
+_____
+XmNbottomShadowColorXmCBottomShadowColorPixeldynamicCSG
+_____
+XmNbottomShadowPixmapXmCBottomShadowPixmapPixmapXmUNSPECIFIED_PIXMAPCSG
+_____
+XmNforegroundXmCForegroundPixeldynamicCSG
+_____
+XmNhelpCallbackXmCCallbackXtCallbackListNULLC
+_____
+XmNhighlightColorXmCHighlightColorPixeldynamicCSG
+_____
+XmNhighlightPixmapXmCHighlightPixmapPixmapdynamicCSG
+_____
+XmNinitialFocusXmCInitialFocusWidgetNULLCSG
+_____
+XmNlayoutDirectionXmCLayoutDirectionXmDirectiondynamicCG
+_____
+XmNnavigationTypeXmCNavigationTypeXmNavigationTypeXmTAB_GROUPCSG
+_____
+XmNpopupHandlerCallbackXmCCallbackXtCallbackListNULLC
+_____
+XmNshadowThicknessXmCShadowThicknessDimension0CSG
+_____
+XmNstringDirectionXmCStringDirectionXmStringDirectiondynamicCG
+_____
+XmNtopShadowColorXmCTopShadowColorPixeldynamicCSG
+_____
+XmNtopShadowPixmapXmCTopShadowPixmapPixmapdynamicCSG
+_____
+XmNtraversalOnXmCTraversalOnBooleanTrueCSG
+_____
+XmNunitTypeXmCUnitTypeunsigned chardynamicCSG
+_____
+XmNuserDataXmCUserDataXtPointerNULLCSG
+_____
+.TE
+.PP
+.TS
+tab() box;
+c s s s s
+l| l| l| l| l.
+\fBComposite Resource Set\fP
+\fBName\fP\fBClass\fP\fBType\fP\fBDefault\fP\fBAccess\fP
+_____
+XmNchildrenXmCReadOnlyWidgetListNULLG
+_____
+XmNinsertPositionXmCInsertPositionXtOrderProcNULLCSG
+_____
+XmNnumChildrenXmCReadOnlyCardinal0G
+_____
+.TE
+.PP
+.TS
+tab() box;
+c s s s s
+l| l| l| l| l.
+\fBCore Resource Set\fP
+\fBName\fP\fBClass\fP\fBType\fP\fBDefault\fP\fBAccess\fP
+_____
+XmNacceleratorsXmCAcceleratorsXtAcceleratorsdynamicCSG
+_____
+XmNancestorSensitiveXmCSensitiveBooleandynamicG
+_____
+XmNbackgroundXmCBackgroundPixeldynamicCSG
+_____
+XmNbackgroundPixmapXmCPixmapPixmapXmUNSPECIFIED_PIXMAPCSG
+_____
+XmNborderColorXmCBorderColorPixelXtDefaultForegroundCSG
+_____
+XmNborderPixmapXmCPixmapPixmapXmUNSPECIFIED_PIXMAPCSG
+_____
+XmNborderWidthXmCBorderWidthDimension0CSG
+_____
+XmNcolormapXmCColormapColormapdynamicCG
+_____
+XmNdepthXmCDepthintdynamicCG
+_____
+XmNdestroyCallbackXmCCallbackXtCallbackListNULLC
+_____
+XmNheightXmCHeightDimensiondynamicCSG
+_____
+XmNinitialResourcesPersistentXmCInitialResourcesPersistentBooleanTrueC
+_____
+XmNmappedWhenManagedXmCMappedWhenManagedBooleanTrueCSG
+_____
+XmNscreenXmCScreenScreen *dynamicCG
+_____
+XmNsensitiveXmCSensitiveBooleanTrueCSG
+_____
+XmNtranslationsXmCTranslationsXtTranslationsdynamicCSG
+_____
+XmNwidthXmCWidthDimensiondynamicCSG
+_____
+XmNxXmCPositionPosition0CSG
+_____
+XmNyXmCPositionPosition0CSG
+_____
+.TE
+.SS "Callback"
+.PP
+A pointer to the following structure is passed to callbacks for
+\fBXmNpageChangedCallback\fP\&.
+.PP
+.nf
+typedef struct {
+        int reason;
+        XEvent *event;
+        int     page_number;
+        Widget  page_widget;
+        XmString tab_label;
+        int     prev_page_number;
+        Widget  prev_page_widget;
+        XmString prev_tab_label;
+} XmAxyNotebookCallbackStruct;
+.fi
+.IP "\fIreason\fP" 10
+Specifies the reason for the callback\&. 
+Always set to \fBXmAxyNotebookPageChangedReason\fP\&.
+.IP "\fIevent\fP" 10
+Points to the \fBXEvent\fP that triggered the callback\&. It can be NULL\&.
+.IP "\fIpage_number\fP" 10
+Indicates the page number to be displayed\&.
+.IP "\fIpage_widget\fP" 10
+Indicates the page widget that has the new page number\&.
+.IP "\fItab_label\fP" 10
+Indicates tab label for the new page\&. 
+.IP "\fIprev_page_number\fP" 10
+Indicates the page number of the currently displayed page\&. 
+.IP "\fIprev_page_widget\fP" 10
+Indicates the currently displayed page widget\&. 
+.IP "\fIprev_tab_label\fP" 10
+Indicates tab label for the currently displayed page\&. 
+.SS "Translations"
+.PP
+Notebook inherits translations from Manager\&.
+It also overrides the following translations for the \fBXmDrawingArea\fP child:
+.IP "\fB<FocusIn>\fP:" 10
+XmAxyNotebookDAFocusIn()
+.IP "\fB<FocusOut>\fP:" 10
+XmAxyNotebookDAFocusOut()
+.IP "\fB<Btn1Down>\fP:" 10
+XmAxyNotebookDAMouseDown()
+.IP "\fB<Btn1Down>(2+)\fP:" 10
+XmAxyNotebookDAMouseDown()
+.IP "\fB:<Key>osfRight\fP:" 10
+XmAxyNotebookDAMoveRight()
+.IP "\fB:<Key>osfLeft\fP:" 10
+XmAxyNotebookDAMoveLeft()
+.IP "\fB:<Key>osfDown\fP:" 10
+XmAxyNotebookDAMoveRight()
+.IP "\fB:<Key>osfUp\fP:" 10
+XmAxyNotebookDAMoveLeft()
+.IP "\fB<Key>Return\fP:" 10
+XmAxyNotebookDASelect()
+.IP "\fB<Key>space\fP:" 10
+XmAxyNotebookDASelect()
+
+.SS "Action Routines"
+.PP
+Action routines defined by Notebook are described below\&.
+\fBPlease note that they are invoked on the "Tabs" DrawingArea child
+and XEvents are assumed to be relative to this child's window\&!\fP
+
+.IP "XmAxyNotebookDAFocusIn()" 10
+Highlights the current tab label\&.
+.IP "XmAxyNotebookDAFocusOut()" 10
+Unighlights any currently highlighted tab label\&.
+.IP "XmAxyNotebookDAMouseDown()" 10
+If coordinates of the MouseEvent are within one of the shown but not current
+tabs, makes this tab current and highlights it\&.
+.IP "XmAxyNotebookDAMoveLeft()" 10
+Moves highlight to the next tab to the left of the currently highligted\&.
+If the very first one was highlighted, moves highlight to the last tab\&.
+.IP "XmAxyNotebookDAMoveRight()" 10
+Moves highlight to the next tab to the right of the currently highligted\&.
+If the very last one was highlighted, moves highlight to the first tab\&.
+.IP "XmAxyNotebookDASelect()" 10
+Makes currently highlighted tab current\&.
+
+.SS "Additional Behavior"
+.PP
+The Notebook widget has the additional behavior described below:
+When Notebook accepts a focus, it draws a highlight around the label in the
+tab corresponding to the visible child. One can then use <Tab> to move focus
+to the child itself or use <osfLeft>,<osfRight>,<osfUp>, and <osfDown> to move
+the highlight to other (not current) tabs. To make highlighted tab current,
+use <Return> or <space>.
+If Notebook is resized so that there is not enough space for all the tabs,
+only those tabs that can be drawn fully inside an allocated space are shown.
+You can still traverse to the "invisible" pages by using keyboard navigation
+described above. Highlight is not visible for the tabs that are not shown, but 
+the page can still be activated with <Return> or <space>.
+
+.SH "METHODS"
+.PP 
+Notebook defines the following methods:
+.PP
+.nf
+\fBWidget \fBXmAxyCreateNotebook\fP\fR(
+\fBWidget \fBparent\fR\fR,
+\fBString \fBname\fR\fR,
+\fBArgList \fBarglist\fR\fR,
+\fBCardinal \fBargcount\fR\fR)
+.fi
+.PP 
+Creates an instance of a Notebook and returns the associated Widget ID\&.
+.IP "\fIparent\fP" 10
+Specifies the parent widget ID
+.IP "\fIname\fP" 10
+Specifies the name of the created widget
+.IP "\fIarglist\fP" 10
+Specifies the argument list
+.IP "\fIargcount\fP" 10
+Specifies the number of attribute/value pairs in the argument list
+(\fIarglist\fP)
+
+.PP
+.nf
+\fBint \fBXmAxyGetCurrentPage\fP\fR(
+\fBWidget \fBnotebook\fR\fR)
+.fi
+.PP 
+Returns the current page number\&.
+.IP "\fInotebook\fP" 10
+Specifies the Notebook widget ID
+
+.PP
+.nf
+\fBWidget \fBXmAxyGetCurrentWidget\fP\fR(
+\fBWidget \fBnotebook\fR\fR)
+.fi
+.PP 
+Returns the widget ID of the currently visible (current) child\&.
+.IP "\fInotebook\fP" 10
+Specifies the Notebook widget ID
+
+.PP
+.nf
+\fBint \fBXmAxyGetNumberOfPages\fP\fR(
+\fBWidget \fBnotebook\fR\fR)
+.fi
+.PP 
+Returns the total number of pages in the Notebook\&.
+.IP "\fInotebook\fP" 10
+Specifies the Notebook widget ID
+
+.PP
+.nf
+\fBvoid \fBXmAxySetCurrentPage\fP\fR(
+\fBWidget \fBnotebook\fR\fR,
+\fBint \fBpage\fR\fR)
+.fi
+.PP 
+Sets the current page in accordance to the argument specified\&. 
+If out of range (less then 1 or greater then the total number of pages),
+the methos does nothing\&.
+.IP "\fInotebook\fP" 10
+Specifies the Notebook widget ID
+.IP "\fIpage\fP" 10
+Specifies the page to make current.
+
+.PP
+.nf
+\fBvoid \fBXmAxySetCurrentWidget\fP\fR(
+\fBWidget \fBnotebook\fR\fR,
+\fBint \fBchild\fR\fR)
+.fi
+.PP 
+Sets the current page in accordance to the argument specified\&. 
+If child specified is not a managed child of the Notebook in question
+or the DrawingArea "Tabs" child created by Notebook itself, methos just 
+returns\&.
+.IP "\fInotebook\fP" 10
+Specifies the Notebook widget ID
+.IP "\fIchild\fP" 10
+Specifies the child to make current.
+
+.SH "RELATED"
+.PP
+\fBComposite\fP(3),
+\fBConstraint\fP(3),
+\fBCore\fP(3),
+and \fBXmManager\fP(3)\&.
+
+.SH "AUTHOR"
+.PP
+Alexander Yukhimets (alexy@edgarmail.com)
+

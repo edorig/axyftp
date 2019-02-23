@@ -1,0 +1,7 @@
+AUTOMAKE_OPTIONS=foreign 
+
+CLEANFILES=*~
+MAINTAINERCLEANFILES=Makefile.in
+
+EXTRA_DIST=ComboBox.c  ComboBox.h  ComboBoxP.h
+

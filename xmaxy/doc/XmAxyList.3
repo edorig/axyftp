@@ -1,0 +1,204 @@
+'\" t
+.TH "XmAxyList" "3X"
+.SH "NAME"
+\fBXmAxyList\fP \(em List widget class
+.SH "SYNOPSIS"
+.PP
+.nf
+#include <XmAxy/List\&.h>
+.fi
+.SH "DESCRIPTION"
+.PP
+List is a primitive widget that enhances the capabilities of standard
+XmList widget by providing multi-column format for the list\&.
+This widget is still in the pretty early stage of development\&.
+Author makes no guarantee that even exiting API would remain the same\&.
+
+.SS "Classes"
+.PP
+List inherits behavior and resources from \fBCore\fP, and \fBXmPrimitive\fP
+classes.\&.
+.PP
+The class pointer is \fBxmAxyListWidgetClass\fP\&.
+.PP
+The class name is \fBXmAxyList\fP\&.
+.SS "New Resources"
+.PP
+The following table defines a set of widget resources used by the
+programmer to specify data\&. The programmer can also set the resource
+values for the inherited classes to set attributes for this widget\&.
+The codes in the access column indicate if the given resource
+can be set at creation time (C), set by using \fBXtSetValues\fP
+(S), retrieved by using \fBXtGetValues\fP (G), or is not applicable (N/A)\&.
+.PP
+.TS
+tab() box;
+c s s s s
+l| l| l| l| l.
+\fBXmAxyList Resource Set\fP
+\fBName\fP\fBClass\fP\fBType\fP\fBDefault\fP\fBAccess\fP
+_____
+XmNfontListXmCFontListXmFontListdynamicCSG
+_____
+XmNhighlightThicknessXmCHighlightThicknessDimension1CSG
+.TE
+.IP "\fBXmNfontList\fP" 10
+Specifies the font list for tab labels\&.
+.IP "\fBXmNhighlightThickness\fP" 10
+Specifies thickness of highlight drawn around the tab label\&.
+
+.SS "Inherited Resources"
+.PP
+List inherits behavior and resources from the
+superclasses described in the following tables\&.
+For a complete description of each resource, refer to the
+reference page for that superclass\&.
+.TS
+tab() box;
+c s s s s
+l| l| l| l| l.
+\fBXmPrimitive Resource Set\fP
+\fBName\fP\fBClass\fP\fBType\fP\fBDefault\fP\fBAccess\fP
+_____
+XmNbottomShadowColorXmCBottomShadowColorPixeldynamicCSG
+_____
+XmNbottomShadowPixmapXmCBottomShadowPixmapPixmapXmUNSPECIFIED_PIXMAPCSG
+_____
+XmNforegroundXmCForegroundPixeldynamicCSG
+_____
+XmNhelpCallbackXmCCallbackXtCallbackListNULLC
+_____
+XmNhighlightColorXmCHighlightColorPixeldynamicCSG
+_____
+XmNhighlightPixmapXmCHighlightPixmapPixmapdynamicCSG
+_____
+XmNinitialFocusXmCInitialFocusWidgetNULLCSG
+_____
+XmNlayoutDirectionXmCLayoutDirectionXmDirectiondynamicCG
+_____
+XmNnavigationTypeXmCNavigationTypeXmNavigationTypeXmTAB_GROUPCSG
+_____
+XmNpopupHandlerCallbackXmCCallbackXtCallbackListNULLC
+_____
+XmNshadowThicknessXmCShadowThicknessDimension0CSG
+_____
+XmNstringDirectionXmCStringDirectionXmStringDirectiondynamicCG
+_____
+XmNtopShadowColorXmCTopShadowColorPixeldynamicCSG
+_____
+XmNtopShadowPixmapXmCTopShadowPixmapPixmapdynamicCSG
+_____
+XmNtraversalOnXmCTraversalOnBooleanTrueCSG
+_____
+XmNunitTypeXmCUnitTypeunsigned chardynamicCSG
+_____
+XmNuserDataXmCUserDataXtPointerNULLCSG
+.TE
+.PP
+.TS
+tab() box;
+c s s s s
+l| l| l| l| l.
+\fBCore Resource Set\fP
+\fBName\fP\fBClass\fP\fBType\fP\fBDefault\fP\fBAccess\fP
+_____
+XmNacceleratorsXmCAcceleratorsXtAcceleratorsdynamicCSG
+_____
+XmNancestorSensitiveXmCSensitiveBooleandynamicG
+_____
+XmNbackgroundXmCBackgroundPixeldynamicCSG
+_____
+XmNbackgroundPixmapXmCPixmapPixmapXmUNSPECIFIED_PIXMAPCSG
+_____
+XmNborderColorXmCBorderColorPixelXtDefaultForegroundCSG
+_____
+XmNborderPixmapXmCPixmapPixmapXmUNSPECIFIED_PIXMAPCSG
+_____
+XmNborderWidthXmCBorderWidthDimension0CSG
+_____
+XmNcolormapXmCColormapColormapdynamicCG
+_____
+XmNdepthXmCDepthintdynamicCG
+_____
+XmNdestroyCallbackXmCCallbackXtCallbackListNULLC
+_____
+XmNheightXmCHeightDimensiondynamicCSG
+_____
+XmNinitialResourcesPersistentXmCInitialResourcesPersistentBooleanTrueC
+_____
+XmNmappedWhenManagedXmCMappedWhenManagedBooleanTrueCSG
+_____
+XmNscreenXmCScreenScreen *dynamicCG
+_____
+XmNsensitiveXmCSensitiveBooleanTrueCSG
+_____
+XmNtranslationsXmCTranslationsXtTranslationsdynamicCSG
+_____
+XmNwidthXmCWidthDimensiondynamicCSG
+_____
+XmNxXmCPositionPosition0CSG
+_____
+XmNyXmCPositionPosition0CSG
+.TE
+.SS "Callback"
+.PP
+A pointer to the following structure is passed to callbacks for
+\fBXmNdefaultActionCallback\fP\&.
+.PP
+.nf
+typedef struct {
+        int reason;
+        XEvent *event;
+	int row;
+	int column;
+} XmAxyListDefaultActionCallbackStruct;
+.fi
+.IP "\fIreason\fP" 10
+Specifies the reason for the callback\&. 
+Always set to \fBXmAxyListDefaultActionReason\fP\&.
+.IP "\fIevent\fP" 10
+Points to the \fBXEvent\fP that triggered the callback\&. It can be NULL\&.
+.SS "Translations"
+.PP
+Notebook inherits translations from Primitive\&.
+.SS "Action Routines"
+.PP
+Action routines defined by List are described below\&.
+
+.SS "Additional Behavior"
+.PP
+The List widget has the additional behavior described below:
+
+.SH "METHODS"
+.PP 
+Notebook defines the following methods:
+.PP
+.nf
+\fBWidget \fBXmAxyCreateList\fP\fR(
+\fBWidget \fBparent\fR\fR,
+\fBString \fBname\fR\fR,
+\fBArgList \fBarglist\fR\fR,
+\fBCardinal \fBargcount\fR\fR)
+.fi
+.PP 
+Creates an instance of a List and returns the associated Widget ID\&.
+.IP "\fIparent\fP" 10
+Specifies the parent widget ID
+.IP "\fIname\fP" 10
+Specifies the name of the created widget
+.IP "\fIarglist\fP" 10
+Specifies the argument list
+.IP "\fIargcount\fP" 10
+Specifies the number of attribute/value pairs in the argument list
+(\fIarglist\fP)
+
+
+.SH "RELATED"
+.PP
+\fBCore\fP(3),
+and \fBXmPrimitive\fP(3)\&.
+
+.SH "AUTHOR"
+.PP
+Alexander Yukhimets (alexy@edgarmail.com)
+

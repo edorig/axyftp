@@ -1,0 +1,324 @@
+This is version 1.4.0 for the original ComboBox widget of Interleaf, Inc.
+I made a few changes and merged some modifications by several other sources
+(see INSTALL file for details) making it mostly compatible with standard CDE 
+ComboBox.  Widget is available under original license.
+
+Alexander Yukhimets.
+(AxY)
+alexy@edgarmail.com
+
+1999-12-16
+
+
+/***********************************************************
+Copyright 1993 Interleaf, Inc.
+
+Permission to use, copy, modify, and distribute this software
+and its documentation for any purpose without fee is granted,
+provided that the above copyright notice appear in all copies
+and that both copyright notice and this permission notice appear
+in supporting documentation, and that the name of Interleaf not
+be used in advertising or publicly pertaining to distribution of
+the software without specific written prior permission.
+
+Interleaf makes no representation about the suitability of this
+software for any purpose. It is provided "AS IS" without any
+express or implied warranty. 
+******************************************************************/
+
+Notes/Issues:
+- The list menu is posted on the select button release.  In order to
+  be like Windows, the menu would come up on the button press, and allow
+  the user to drag immediately, without letting go of the select button.
+  When I wrote the widget, I didn't have time to investigate getting this
+  drag to work.  We would have to simulate the select press inside the
+  list, I imagine.
+- No key pattern matching available.
+- Lack of translation table functionality.
+
+
+1. ComboBox Widget
+
+1.1 Widget Class Name
+
+ComboBox
+
+1.2 Synopsis
+
+    #include <Dt/ComboBox.h>
+
+    widget = DtCreateComboBox(parent, name, arglist, num_args);
+    XtManageChild(widget);
+
+1.3 Description
+
+    DtComboBox is a combination of XmTextField (for DtDROP_DOWN_COMBO_BOX
+    mode) or XmLabel (for DtDROP_DOWN_LIST mode) and an XmList widget that
+    provides a list of choices for the text or label. 
+
+    In DtDROP_DOWN_COMBO_BOX mode, in addition to selection from the list,
+    user can type in his choice directly into the text field.
+    Widget IDs of TextField and List are available as both resource values
+    (DtNtextField and DtNlist repectively) and via XtNameToWidget(3X) call
+    with names specified as "Text" and "*List". An asterisk (*) is required
+    as the List widget is not an immediate child of the ComboBox Widget.
+
+1.4 Resources
+
+    Property		    Type		Init		      Access
+    --------		    ----		----		      ------
+    DtNactivateCallback     CallbackList        NULL                  CSG
+    DtNalignment            unsigned char       DtALIGNMENT_BEGINNING CSG
+    DtNarrowSpacing         Dimension           0                     CSG
+    DtNarrowSize            Dimension           dynamic                 G
+    DtNarrowType            unsigned char       DtWINDOWS             CSG
+    DtNcolumns              Integer             20                    CSG
+    DtNfocusCallback        CallbackList        NULL                  CSG
+    DtNitemCount            Unsigned Integer    0                     CSG
+    DtNitems                XmStringTable       NULL                  CSG
+    DtNlabelString          XmString            NULL                  CSG
+    DtNlist                 Widget              NULL                    G
+    DtNlistFontList         FontList            NULL                  CSG
+    DtNlistMarginHeight     Dimension           2                     CSG
+    DtNlistMarginWidth      Dimension           2                     CSG
+    DtNlistSpacing          Dimension           0                     CSG
+    DtNlosingFocusCallback  CallbackList        NULL                  CSG
+    DtNmarginHeight         Dimension           2                     CSG
+    DtNmarginWidth          Dimension           2                     CSG
+    DtNmaxLength            Unsigned Integer    MAXINT                CSG
+    DtNmenuPostCallback     CallbackList        NULL                  CSG
+    DtNorientation          unsigned char       DtRIGHT               CSG
+    DtNpoppedUp             Boolean             FALSE                   G
+    DtNrecomputeSize        Boolean             TRUE                  CSG
+    DtNselectedItem         XmString            NULL                  CSG
+    DtNselectedPosition     Unsigned Integer    0                     CSG
+    DtNselectionCallback    CallbackList        NULL                  CSG
+    DtNtextField            Widget              NULL                    G
+    DtNtopItemPosition      Unsigned Integer    1                     CSG
+    DtNcomboBoxType         unsigned char       DtDROP_DOWN_LIST      CSG
+    DtNupdateLabel          Boolean             TRUE                  CSG
+    DtNvisibleItemCount     Unsigned Integer    10                    CSG
+
+    DtNactivateCallback:
+		List of callbacks called when the user does KActivate in
+		the text-field widget (when ComboBox is 
+		DtDROP_DOWN_COMBO_BOX). See also XmTextFieldWidget.
+		
+    DtNalignment:
+		Alignment of the text within the non-editable label.
+		This only gets used if DtNcomboBoxType is DtDROP_DOWN_LIST.
+		Values are:
+			DtALIGNMENT_CENTER, DtALIGNMENT_BEGINNING, 
+			DtALIGNMENT_END
+		See also XmLabelWidget
+
+    DtNarrowSpacing:
+		Amount of space between the arrow and the label or 
+		text-field (in pixels).
+
+    DtNarrowSize:
+		Height/Width of arrow.  This is not a settable resource;
+		it is based on the height of the ComboBox (which is
+		related to the font used).
+
+    DtNarrowType:
+		Type of down arrow displayed in the ComboBox.  The legal
+		values are:  DtWINDOWS, DtMOTIF
+
+    DtNcolumns:
+		This resource is passed on to the text-field widget.
+		See also XmTextFieldWidget.
+
+    DtNfocusCallback:
+		List of callbacks called when the text-field widget accepts
+		focus (when ComboBox is editable - XmDROP_DOWN_COMBO_BOX).
+		See also XmTextFieldWidget.
+
+    DtNitemCount:
+		Total number of items.  This value must be the number of
+                items in DtNitems and must not be negative.  It is 
+                automatically updated by the widget whenever an item
+                is added or deleted.
+
+    DtNitems:   
+		A list of xm-strings which will be displayed in the drop
+		down list box.
+
+    DtNlabelString:
+		This is the string that will be used in the label when the 
+                resource XmNupdateLabel is FALSE.  This string will remain
+                in the label as long as the XmNupdateLayout resource is
+                FALSE, even if the user picks a new item off the list.
+
+    DtNlist:
+		List widget (which is inside the popup).  Gettable only.
+
+    DtNlistFontList:
+		This resource is passed on to the XmListWidget as the
+		XmNfontList resource.
+		See also XmListWidget.
+
+    DtNlistMarginHeight:
+		This resource is passed on to the XmListWidget as the
+		XmNlistMarginHeight resource.
+		See also XmListWidget.
+
+    DtNlistMarginWidth:
+		This resource is passed on to the XmListWidget as the
+		XmNlistMarginWidth resource.
+		See also XmListWidget.
+
+    DtNlistSpacing:
+		This resource is passed on to the XmListWidget as the
+		XmNlistSpacing resource.
+		See also XmListWidget.
+
+    DtNlosingFocusCallback:
+		List of callbacks called when the text-field widget loses
+		focus (when ComboBox is editable - DtDROP_DOWN_COMBO_BOX).
+		See also XmTextFieldWidget.
+
+    DtNmarginHeight:
+		Vertical distance from the beginning of the widget to the
+                start of the shadow.  Used for making this widget
+                look like push-buttons, etc.
+
+    DtNmarginWidth:
+		Horizontal distance from the beginning of the widget to 
+                the start of the shadow.  Used for making this widget
+                look like push-buttons, etc.
+
+    DtNmaxLength:
+		Maximum length of the text string that can be entered into
+		a text-field widget.  This resource is passed on to the
+		text-field (when ComboBox is editable - DtDROP_DOWN_COMBO_BOX).
+		See also XmTextFieldWidget.
+
+    DtNmenuPostCallback:
+		List of callbacks called right before the list menu
+		gets put on the screen.
+
+    DtNorientation:
+		Specifies location of down arrow.  Legal values are:
+		XmLEFT, XmRIGHT
+
+    DtNpoppedUp:
+		Returns TRUE if the list menu is mapped; otherwise, FALSE.
+
+    DtNrecomputeSize:
+		If FALSE, the widget will not try to recompute a new
+                size if setting some other resource would cause it
+                to grow or shrink.
+
+    DtNselectedItem:
+		Item currently visible in list.  Can be used to
+		change selected item.  User must make copy of this 
+		before modifying.
+
+    DtNselectedPosition:
+		Position of item, within scrolling list, currently 
+                visible (in label or text-field).  Can be used
+		to change selected item. Starts at 0.
+
+    DtNselectionCallback:
+		List of callbacks called when the user selects something
+		off the list (the list's XmNdefaultActionCallback or
+		XmNbrowseSelectionCallback callbacks).
+		See also XmListWidget.
+
+    DtNtextField:
+		text-field widget used within the ComboBox when
+		XmNtype is XmDROP_DOWN_COMBO_BOX.
+
+    DtNtopItemPosition:
+		This resource is passed on to the XmListWidget as the
+		XmNtopItemPosition resource.
+		See also XmListWidget.
+
+    DtNcomboBoxType:
+		Type of combo-box create.  Legal values are:
+			DtDROP_DOWN_LIST (non-editable, uses label)
+			DtDROP_DOWN_COMBO_BOX (editable, uses text-field)
+
+    DtNupdateLabel:
+    		If TRUE, the contents of the label will change when the
+                user picks a new item off the list.  If FALSE, the
+                label will not update, and the resource XmNlabelString
+                will be used as the label.
+
+    DtNvisibleItemCount:
+		This resource is passed on to the XmListWidget as the
+		XmNvisibleItemCount resource.
+		See also XmListWidget.
+
+
+========================================================================
+
+Functions available for ComboBox widget.
+
+	Widget
+	DtCreateComboBox(parent, name, args, num_args)
+	Widget parent;
+	char *name;
+	ArgList args;
+	int num_args;
+	{
+	}
+
+Creates an instance of a ComboBox widget.
+
+
+	void
+	DtComboBoxAddItem(widget, item, position, unique)
+	DtComboBoxWidget widget;
+	XmString item;
+	int position;
+	Boolean unique;
+
+Adds the given item to the list at the given position.
+position is an integer specifying the position of the new item in the
+list.  A value of 1 makes the new item the first item in the list; a value
+of 2 makes it the second item, and so on.  A value of 0 (zero) makes the new
+item the last item in the list.
+If the unique parameter is TRUE, the item will only be added if it doesn't
+already exist.  If it is FALSE, the item will always be added.
+See also, XmListSelectItem in the Motif reference manual.
+
+
+	void
+	DtComboBoxDeletePos(widget, position)
+	DtComboBoxWidget widget;
+	int position;
+
+Deletes the item at the given position from the list.
+position is an integer specifying the position of the item to delete 
+in the list.  A value of 1 indicates that the first item in the list is
+to be deleted. A value of 2 indicates the second item, etc.  A value of 0
+indicates that the last item is to be deleted.  See also, 
+XmListSelectItem in the Motif reference manual.
+
+	void
+	DtComboBoxSetItem(widget, item)
+	DtComboBoxWidget widget;
+	XmString item;
+
+Puts the given item into the combo-box label or text-field (this will be the
+new value shown).  The given item will be positioned at the top of the
+list.  This may cause problems if the viewing area is larger than the
+number of items in the list.  The new item will not be selected (use
+DtComboBoxSelectItem).
+See also, XmListSetItem in the Motif reference manual.
+
+
+	void
+	DtComboBoxSelectItem(combo, item)
+	DtComboBoxWidget combo;
+	XmString item;
+
+Puts the given item into the combo-box label or text-field (this will be the
+new value shown).  The currently selected item in the list will be deselected
+and the given item will be selected.  See also, XmListSelectItem in the Motif
+reference manual.
+
+------------------------------------------------------------------------
+

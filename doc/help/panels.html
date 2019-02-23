@@ -1,0 +1,164 @@
+<HTML><HEAD><TITLE>AxY FTP User Guide - Site Panels</TITLE></HEAD><BODY
+bgcolor="#F0F0FF">
+<H2>Local and Remote Panels</h2>
+
+<P>
+The most information and control packed area of AxY FTP is local and remote
+system panels containing <a href="#listing">detailed directory listing</a>, 
+<a href="#name">current directory name</a>, 
+and <a href="#column">vertical column of per-site controls</a>.
+</P>
+
+<a name="listing">
+<h3>Directory Listing</h3>
+<P>
+Each row in the listing corresponds to a file (or directory) entry on either
+local or remote site. There are five columns of information for each entry:
+<UL>
+<li> Graphical representation of entry type:<br>
+<table border="0">
+<tr><th><img src="folder.gif" alt="Folder icon"></th><td>directory</td></tr>
+<tr><th><img src="up.gif" alt="Folder with Up Arrow icon"></th>
+<td>upper level directory</td></tr>
+<tr><th><img src="link.gif" alt="Document with Right Arrow icon"></th>
+<td>symbolic link</td></tr>
+<tr><th><img src="doc.gif" alt="Document icon"></th><td>"normal" file</td></tr>
+</table>
+More granular file type distinction is possible in future releases<br>
+<li> File name
+<li> Last modification date in the form YYYYMMDD
+<li> Last modification time in 24-hour hh:mm format
+<li> File size in bytes
+</UL>
+</P>
+<p>
+You may resize the columns.<br>
+<ul>
+<li><i>Motif version:</i><br>
+Position pointer on the column edge and drag it with <tt>Shift</tt> key and 
+<b>middle (second)</b> mouse button 
+pressed. Make sure the pointer is <b>NOT</b> within labels area, but inside 
+the listing window.<br>
+<li><i>GTK+ version:</i><br>
+Position pointer on the column edge within labels area and drag it with
+<b>left (first)</b> mouse button pressed.<br>
+</ul>
+</p>
+<p>
+You may select entries by clicking on the row of interest with left mouse
+button. It is also possible to select multiple entries with clicking or
+dragging the pointer with either <tt>Shift</tt> or <tt>Ctrl</tt> key pressed.
+</p>
+<p> Double-click on a directory entry to change to it.
+</p>
+<p>There are no sorting capabilities of directory listing in the current 
+version of the program.
+</p>
+
+<a name="name">
+<h3>Directory name box</h3>
+<p>
+The area with the name of the current directory is displayed is located on top
+of the directory listing. 
+</p>
+<p>
+You may click on the arrow right to the name to access the history list.
+Current directory always appears selected in this list. Selecting any other
+entry will make the program to change to the directory you selected.
+</p>
+<p>You may directly edit the text filed with directory name by first clicking
+on it with left mouse button. Pressing <tt>Enter</tt> key will make the
+program to change to the directory you entered. If you misspelled the
+directory name or if it was not possible to change to it for any other reason,
+text in the directory name field is still the one you entered and is NOT a
+valid name of the directory being displayed. History list, however, has the
+correct name of the current directory selected. You may pull the history list
+down and click on selected entry to restore correct directory name in the
+text field.
+</P>
+
+<a name="column">
+<h3>Column of controls</h3>
+<p>
+Main functionality of AxY FTP is provided through these columns of local and
+remote controls. Each column consists of the following:
+ <ul>
+ <li><a href="#chgdir">ChgDir</a>
+ <li><a href="#mkdir">MkDir</a>
+ <li><a href="#mask">Mask entry field</a>
+ <li><a href="#view">View</a>
+ <li><a href="#exec">Exec</a>
+ <li><a href="#rename">Rename</a>
+ <li><a href="#delete">Delete</a>
+ <li><a href="#refresh">Refresh</a>
+ <li><a href="#dirinfo">DirInfo</a>
+</ul>
+</p>
+<UL>
+<a name="chgdir">
+<li><b>ChgDir</b> button<br>
+   Select some entry in directory listing (directory preferably) and click
+   this button to change to the selected directory entry. <br>
+<a name="mkdir">
+<li><b>MkDir</b> button<br>
+   Click this button and you will be prompted with a little dialog window
+   to enter directory name you wish to create. Press <tt>Enter</tt> or click
+   "OK" to actually perform the operation.<br>
+<a name="mask">
+<li><b>Mask</b> text entry field<br>
+   Enter some mask using normal shell wild cards and press <tt>Enter</tt> for
+   immediate effect. An example would be "*.c" to display only C source
+   code files or ".*" to display only "hidden" entries. ".* *" mask should
+   force to display all entries present in current directory. Current
+   directory (.) and upper level directory (..) entries will be present in any
+   case.<br>
+   Note that not all remote sites support this feature.<br>
+<a name="view">
+<li><b>View</b> button<br>
+   Select some entry in directory listing (text file preferably) and click
+   this button to make file contents displayed. <br>
+   <p>
+   Following rules are used to select the viewer:<br>
+   Internal viewer is used for the remote file.<br>
+   For local file AxY FTP attempts to start the viewer specified by $XEDITOR
+   environment variable (or "gvim" if not set). If fails, the program attempts
+   to start xterm and execute a viewer specified by $EDITOR environment
+   variable in it. If $EDITOR is not set, "vi" editor is executed in xterm 
+   window.
+   </p>
+   Much more flexibility in possible local and remote viewers will be present 
+   in future releases of AxY FTP.<br>
+<a name="exec">
+<li><b>Exec</b> button<br>
+   Click this button to be prompted for the command to be executed on either
+   local system in a subshell or on a remote system using 'SITE' command.
+   A good example of the command would be <tt>"umask&nbsp;022"</tt> or 
+   <tt>"chmod&nbsp;0755&nbsp;filename"</tt>. Directory listing is NOT
+   updated after the command is executed, use "Refresh" to force the
+   update.<br>
+<a name="rename">
+<li><b>Rename</b> button<br>
+   Select some entry in directory listing and click on this button to be prompted
+   for a new name of the selected entry. Press <tt>Enter</tt> or click "OK"
+   to perform the operation.<br>
+<a name="delete">
+<li><b>Delete</b> button<br>
+   Select some entry in directory listing and click this button.
+   You will be prompted to confirm the delete operation. Clicking "OK"
+   will perform the operation. Only "normal" files, symbolic links and
+   <em>empty</em> directories can be deleted with this command unless
+   <em>Recursive deletions</em> <a href="options.html#display">option</a>
+   is checked.<br>
+<a name="refresh">
+<li><b>Refresh</b> button<br>
+   Forces update of the current directory name and directory listing.<br>
+<a name="dirinfo">
+<li><b>DirInfo</b> button<br>
+   Displays AxY FTP internal viewer window with even more detailed directory
+   listing similar to the output of <tt>"ls&nbsp;-l"</tt><br>
+</ul>
+
+<a href="main.html">Back to the Main Window Controls</a><br>
+<a href="axyftp.html">Back to the Table of Contents</a>
+
+</body></html>

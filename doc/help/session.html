@@ -1,0 +1,90 @@
+<HTML><HEAD><TITLE>AxY FTP User Guide - Session Window</TITLE></HEAD><BODY
+bgcolor="#F0F0FF">
+<h2>Session Window</h2>
+
+<p>
+Session window appears when you click "connect" button. It consists of
+a lower bar with "OK","Cancel","Save", and "Help" buttons and a Notebook-
+like structure with several pages. This version has three pages labelled 
+<a href="#general">"General"</a>, <a href="#startup">"Startup"</a>, and
+<a href="#advanced">"Advanced"</a>.
+</p>
+<UL> 
+<li> <b>OK</b> button makes session window disappear and attempt to connect
+to the site using the data displayed on the pages of the notebook.
+<li> <b>Cancel</b> button just makes session window disappear.
+<li> <b>Save</b> button saves changes to the selected or new session.
+<li> <b>Help</b> button invokes <a href="help.html">on-line help</a>.
+</ul>
+
+<a name="general">
+<h3>"General" page</h3>
+<ul>
+<li><b>New</b> button<br>
+  clears all fields of the Notebook to make them available for entering new
+  site data. Also De-selects "Profile name" drop-down list.
+<li><b>Delete</b> button<br>
+  deletes selected entry from the "Profile name" drop-down list.
+<li><b>Profile Name</b> drop-down list<br>
+  contains the list of names for the sessions you saved (by clicking on 
+  "Apply" button). Selecting the entry makes all the data of the session
+  appear in the fields of the Notebook. 
+<li><b>Host Name/Address</b> text field<br>
+   contains the name or numeric IP address of the host to connect to.
+<li><b>User ID</b> text field<br>
+  contains the user id to be used while logging onto remote site.
+<li><b>Anonymous</b> toggle<br>
+   is used to make user id "anonymous" and default anonymous FTP password
+   appear in the appropriate fields. Also has effect
+   of making "Password" entry field visible.
+<li><b>Password</b> text field<br>
+  contains the password to be used while logging onto remote site.<br>
+<li><b>Save password</b> toggle<br>
+  is used to make this field for this session saved on disk when you click on
+  "Apply" button. Your password will not be written while saving session data
+  if the toggle is unchecked.
+<li><b>Account</b> text field<br>
+  contains the account name to be used while logging onto remote site.
+  Some FTP servers may need that.
+<li><b>Comment</b> text field<br>
+  may contain whatever descriptive information you want to help you identify
+  the session.
+</ul>
+
+<a name="startup">
+<h3>"Startup" page</h3>
+<p>
+This page contains information on the immediate actions of the program upon
+successful login to the remote site. 
+</p>
+<p>
+First, FTP commands in the "Initial command" text field are sent to the 
+remote server. Separate multiple commands with ';'. An example of this field
+could be:<br>
+<tt>SITE umask 022;SITE chmod 766 /logs/error.log</tt><br>
+Do not put extra spaces, FTP protocol is very sensitive about it!
+<p>
+
+<p>
+Second, the program changes to the remote directory specified in "Initial
+remote directory" field, and then to local directory specified in "Initial
+local directory" field. Remote and local masks are set to the values
+specified in the "Remote File Mask" and "Local File Mask" fields.
+Only after that the directory listings of both local and remote directories are
+updated.
+</P>
+<p>When using automatic reconnect feature of the program by answering "Yes"
+to the "Connection lost. Reconnect?" question, only the commands in the
+"Initial Command" field are sent to the server. File masks and current
+directories will remain the same as they were before losing connection.
+</p>
+<a name="advanced">
+<h3>"Advanced" page</h3>
+<p>
+This page currently contains only one text field: <b>Remote Host Port</b>.<br>
+Default is 21 and it should stay this way unless you know it should be
+changed.
+<p>
+
+<a href="axyftp.html">Back to the Table of Contents</a>
+</body></html>

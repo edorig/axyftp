@@ -1,0 +1,8 @@
+AUTOMAKE_OPTIONS=foreign 
+
+CLEANFILES=*~
+MAINTAINERCLEANFILES=Makefile.in configure aclocal.m4 acinclude.m4
+
+EXTRA_DIST=INSTALL TODO LICENSE README CHANGES
+SUBDIRS=@axy_doc@ XmAxy
+

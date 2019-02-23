@@ -1,0 +1,139 @@
+dnl Process this file with autoconf to produce a configure script.
+dnl define([AC_CACHE_LOAD], )
+dnl define([AC_CACHE_SAVE], )
+
+AC_INIT(src/axyftp.c)
+AM_INIT_AUTOMAKE(axyftp,0.5.1)
+AC_CONFIG_AUX_DIR(.)
+
+dnl Checks for programs.
+AM_PROG_CC_STDC
+if test x$am_cv_prog_cc_stdc = xno ; then
+  AC_MSG_ERROR(No ANSI C - compatible compiler found.)
+fi
+
+AC_PROG_CPP
+AC_PROG_INSTALL
+AC_PROG_MAKE_SET
+
+AC_ARG_WITH(gui,
+  [ --with-gui=GUI        Where GUI is either motif (default) or gtk],
+  if test "x$with_gui" = xmotif || test "x$with_gui" = xgtk ; then
+    axyftp_gui="$with_gui"
+  else 
+    axyftp_gui=
+  fi ,
+  axyftp_gui=
+)
+
+if test -z "$axyftp_gui" || test "x$axyftp_gui" = xmotif ; then
+  AC_PATH_XTRA
+  AXY_PATH_MOTIF
+  AXY_PATH_XPM
+
+  if test x$no_x != xyes && 
+     test x$no_motif != xyes && 
+     test x$no_xpm != xyes ; then
+     axyftp_can_do_motif=yes
+  else
+     axyftp_can_do_motif=
+  fi
+fi
+
+if test -z "$axyftp_gui" && test "x$axyftp_can_do_motif" = xyes ; then
+  axyftp_gui=motif
+fi
+if test -z "$axyftp_gui" && test "x$axyftp_can_do_motif" != xyes ; then
+  axyftp_gui=gtk
+fi
+
+AXYFTP_DEPS=
+
+if test "x$axyftp_gui" = xgtk ; then
+  axyftp_old_gtk=
+  AM_PATH_GTK(1.2.0,axyftp_can_do_gtk=yes)
+  if test "x$axyftp_can_do_gtk" != xyes ; then
+    AM_PATH_GTK(1.0.0,axyftp_can_do_gtk=yes axyftp_old_gtk=yes)
+  fi
+fi
+
+if test "x$axyftp_gui" = xmotif && test "x$axyftp_can_do_motif" != xyes ; then
+  AC_MSG_ERROR(GUI library not found)
+fi
+
+if test "x$axyftp_gui" = xgtk && test "x$axyftp_can_do_gtk" != xyes ; then
+  AC_MSG_ERROR(GUI library not found)
+fi
+
+axyftp_aux_dirs=
+
+if test "x$axyftp_gui" = xmotif ; then
+  AXY_PATH_DT
+  if test "x$no_dt" = xyes ; then
+    axyftp_aux_dirs="$axyftp_aux_dirs dtwidget"
+    DT_CFLAGS="-I\$(top_srcdir)/dtwidget"
+    DT_LIBS="\$(top_builddir)/dtwidget/Dt/libDtWidget.a"
+    AC_SUBST(DT_CFLAGS)
+    AC_SUBST(DT_LIBS)
+    AXYFTP_DEPS="$AXYFTP_DEPS $DT_LIBS"
+  fi
+  AXY_PATH_XMAXY
+  if test "x$no_xmaxy" = xyes ; then
+    axyftp_aux_dirs="$axyftp_aux_dirs xmaxy"
+    XMAXY_CFLAGS="-I\$(top_srcdir)/xmaxy"
+    XMAXY_LIBS="\$(top_builddir)/xmaxy/XmAxy/libXmAxy.a"
+    AC_SUBST(XMAXY_CFLAGS)
+    AC_SUBST(XMAXY_LIBS)
+    AXYFTP_DEPS="$AXYFTP_DEPS $XMAXY_LIBS"
+  fi
+  AXYFTP_INCLUDES="\$(XMAXY_CFLAGS) \$(DT_CFLAGS) \$(MOTIF_CFLAGS) \
+                   $X_CFLAGS \$(XPM_CFLAGS)"
+  AXYFTP_LIBS="\$(XMAXY_LIBS) \$(DT_LIBS) \$(MOTIF_LIBS) \
+               $X_LIBS -lXt $X_PRE_LIBS -lX11 $X_EXTRA_LIBS \$(XPM_LIBS)"
+  AXYFTP_GUI="BUILD_MOTIF"
+else 
+  AXYFTP_INCLUDES="$GTK_CFLAGS"
+  if test "x$old_gtk" = xyes ; then
+    AXYFTP_INCLUDES="-DOLD_GTK $AXYFTP_INCLUDES"
+  fi
+  AXYFTP_LIBS="$GTK_LIBS"
+  AXYFTP_GUI="BUILD_GTK"
+fi
+
+AC_SUBST(AXYFTP_INCLUDES)
+AC_SUBST(AXYFTP_LIBS)
+AC_SUBST(AXYFTP_GUI)
+AC_SUBST(AXYFTP_DEPS)
+
+AC_ARG_WITH(help,
+  [  --with-help=DIR    install help files in DIR (${datadir}/axyftp/help)])
+if test -z "$with_help" || test "x$with_help" = xno ; then
+  helpdir="${datadir}/axyftp/help"
+else 
+  helpdir="$with_help"
+fi
+AC_SUBST(helpdir)
+
+AC_ARG_ENABLE(install_dt,
+  [  --enable-install-dt   Enables installation of supplied Dt library],,
+  enable_install_dt=no 
+  ac_configure_args="$ac_configure_args --disable-install-dt")
+AC_ARG_ENABLE(install_xmaxy,
+  [  --enable-install-xmaxy   Enables installation of supplied XmAxy library],,
+  enable_install_xmaxy=no 
+  ac_configure_args="$ac_configure_args --disable-install-xmaxy")
+
+
+dnl Checks for libraries.
+dnl Checks for header files.
+dnl AC_CHECK_HEADERS(fcntl.h sys/time.h unistd.h)
+dnl Checks for typedefs, structures, and compiler characteristics.
+dnl AC_HEADER_TIME
+dnl AC_STRUCT_TM
+dnl Checks for library functions.
+dnl AC_FUNC_MEMCMP
+dnl AC_TYPE_SIGNAL
+dnl AC_CHECK_FUNCS(getcwd mkdir putenv rmdir select socket strdup strerror strstr)
+
+AC_CONFIG_SUBDIRS($axyftp_aux_dirs)
+AC_OUTPUT(src/Makefile icons/Makefile xpms/Makefile doc/Makefile macro/Makefile doc/help/Makefile Makefile)

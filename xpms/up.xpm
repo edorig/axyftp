@@ -1,0 +1,28 @@
+/* XPM */
+static char *up_p[] = {
+/* width height num_colors chars_per_pixel */
+"    16    14       7            2",
+/* colors */
+"  	c	None",
+"##	c	#000000",
+"--	c	#ffffff",
+"**	c	gray50",
+"hh	c	gray85", /*#c3c3c3",*/
+"jj	c	yellow",
+"@@	c	darkgreen",
+/* pixels */
+"        @@                      ",
+"      @@@@@@                    ",
+"    @@@@@@@@@@                  ",
+"  @@@@@@@@@@@@@@**************  ",
+"**----@@@@@@----------------**##",
+"**hhjj@@@@@@jjhhjjhhjjhhjjhh**##",
+"**jjhh@@@@@@hhjjhhjjhhjjhhjj**##",
+"**hhjj@@@@@@@@@@@@@@@@@@jjhh**##",
+"**jjhh@@@@@@@@@@@@@@@@@@hhjj**##",
+"**hhjj@@@@@@@@@@@@@@@@@@jjhh**##",
+"**jjhhjjhhjjhhjjhhjjhhjjhhjj**##",
+"******************************##",
+"################################",
+"                                "
+};

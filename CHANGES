@@ -1,0 +1,115 @@
+2000-02-04 version 0.5.1
+Fixed a problem with "invisible" directory listing and a linking problem 
+on some systems.
+Many thanks to Paul Haldane and Thanh for their enormous help.
+
+2000-01-22 version 0.5.0
+Name changed to AxY FTP.
+Converted to autoconf/automake.
+Motif 1.2 (including Lesstif) is currently supported.
+XbaeMatrix is not longer used. Much lighter and faster XmAxyList (though not
+as featurefull) is used instead. XmAxy library is supplied with AxY FTP
+distribution.
+Supports the use of CDE DtWidget library (ComboBox widget) - workable
+clone is also supplied,
+Fixed handling of profiles for both interfaces.
+Non-passive transfers are now implemented as a fall-back in case site you are
+connected to does not support passive ones. Pretty transparent for the user.
+Now tested with SOCKS. "runsocks axyftp" works beautifully through
+this kind of of firewall.
+Fixed handling of redial delay option.
+Various icons are now available from the Web site http://www.wxftp.seul.org
+
+1999-11-16
+Quite a few changes in the Motif code. 
+Uses modified Xbae and Tab widgets. Also can use CDE DtComboBox widget
+or a compatible version included with the source.
+
+03/13/1999 version 0.4.4
+Fixed password visibility problem in GTK+ 1.2
+
+03/08/1999 version 0.4.3
+Fixed unexpected bug in Motif version.
+Updated "About" dialog.
+
+03/07/1999 version 0.4.2
+Ported to gtk+-1.2
+
+02/11/1999
+It is possible to cancel the whole download now 
+(no guarantee connection would survive though).
+
+02/09/1999 
+Fixed compilation problem on *BSD systems.
+Little improvement over progress bar handling.
+
+12/20/1998 version 0.4.1
+WXftp is now a free software.
+Minor Makefile changes.
+Fixed symbolic links on NT-like systems (thanks to Ran Golde
+<ran.golde@telrad.co.il>) and improved processing of local
+"ls -ald" lines (when it returns month as a number).
+Partially fixed annoying progress dialog behavior.
+
+08/16/1998
+Fixed another Motif bug (progress dialogs were not removed while _uploading_
+several files) and made some performance improvement changes.
+Transfers should be WAY faster on local network connections.
+
+08/09/1998
+Fixed Motif version double-click bug
+
+08/08/1998 version 0.4.0
+"Apply" -> "Save"
+Implemented recursive deletions, auto-redial, possibility to hide progress
+bar. 
+Progress dialog no longer attracts focus in Motif, don't know if it is
+possible to do with GTK+ (anyone?).
+install.sh fix.
+
+07/02/1998
+Tested the possibility for retries - works!
+Correct size of the file when uploading a symbolic link.
+When upgrading to a version with changed session and options file formats
+backup copies of the files are created.
+Changed order of login and syst - should fix problem for some servers.
+
+06/28/1998
+Fixed some illogical behavior with anonymous passwords
+
+06/23/1998
+Added resizable pane to have different sizes of Local/Remote panels.
+Fixed problem with NT 3.51 FTP server.
+Fixed LICENSE typos.
+
+
+06/19/1998 version 0.3.1
+Implemented multiple resursive uploads and multiple delete.
+Fixed problem with progress indicators not going away in Motif version.
+
+
+05/24/1998 version 0.3.0
+implemented multiple recursive downloads with resume.
+
+05/20/1998
+fixed nasty directoty listing parsing bug.
+
+05/17/1998 version 0.2.1
+Implemented a couple of user options and added ability to connect to
+abitrary port (not only 21).
+
+05/08/1998 version 0.2.0
+
+05/06/1998 
+Finished GTK+ interface and merged with Motif code
+Fixed incorrect download ETA values
+
+04/19/1998 version 0.1.2
+Fixed color allocaltion problem for "shallow" displays.
+
+04/18/1998 version 0.1.1
+Recompiled (with minor fixes) for libc6 (aka glibc-2) and Motif 2.1
+
+4/05/1998 version 0.1
+Initial release.
+

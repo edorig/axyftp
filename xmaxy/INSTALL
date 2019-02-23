@@ -1,0 +1,10 @@
+./configure 
+make
+make install
+
+Use 
+./configure --help
+to see all of the options available.
+
+If you had XPM library installed, "demo" program will be buit in XmAxy
+directory.

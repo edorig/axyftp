@@ -1,0 +1,51 @@
+<HTML><HEAD><TITLE>AxY FTP User Guide - Glossary</TITLE></HEAD><BODY
+bgcolor="#F0F0FF">
+<h2>Glossary.</h2>
+<DL>
+
+<DT>FTP
+<DD>File Transfer Protocol. Defined in RFC 959.
+
+<DT>FTP Client
+<DD>Program that connects to the FTP server, sends requests that follow
+FTP protocol to that FTP server, and interprets the responses received.
+
+<DT>FTP Server
+<DD>Program, usually running in a background, that waits for connection from
+FTP client and then serve the client by responding to requests received from
+the client side.
+
+<DT>Local Site
+<DD>Linux box you are running FTP client from. Generally may differ from the
+host that displays the program window.
+
+<DT>Remote Site
+<DD>The site, FTP server is running on that you are connected to. May very
+well be on the same host as a Local Site.
+
+<DT>Control Connection
+<DD>Connection between FTP client and FTP server used to send and receive
+requests and responses.
+
+<DT>Data Connection
+<DD>Connection usually established between FTP client and FTP server by
+request from the Client. Used to transfer "data" rather than
+requests/responses. An example of "data" would be directory listing or contents
+of the file being transfered.
+
+<DT>Passive Transfer
+<DD>One of the ways to establish Data Connection. Client side requests the
+Server to accept Data Connection, receives information on what address to
+connect to, and then establishes Data Connection by connecting to the server.
+Usually the only way to go if you are behind the firewall.
+
+<DT>Firewall
+<DD>A host that connects your local network to the global Internet.
+May impose some restrictions on type of the Internet services allowed to pass
+through.
+
+</DL>
+
+<a href="axyftp.html">Back to the Table of Contents</a>
+
+</BODY></HTML>
